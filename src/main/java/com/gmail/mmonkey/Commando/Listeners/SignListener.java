@@ -18,6 +18,7 @@ import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
+import org.spongepowered.api.util.command.CommandMessageFormatting;
 import org.spongepowered.api.world.Location;
 
 import com.gmail.mmonkey.Commando.Action;
@@ -25,6 +26,7 @@ import com.gmail.mmonkey.Commando.Commando;
 import com.gmail.mmonkey.Commando.Events.CommandoConvertTextEvent;
 import com.gmail.mmonkey.Commando.Events.TextType;
 import com.gmail.mmonkey.Commando.Filters.CommandFilter;
+import com.gmail.mmonkey.Commando.Formatting.Formatter;
 import com.gmail.mmonkey.Commando.Services.TextConvertingService;
 import com.gmail.mmonkey.Commando.Services.TextParsingService;
 import com.google.common.base.Optional;
@@ -109,7 +111,20 @@ public class SignListener {
 		
 		} else {
 			
-			player.sendMessage(lines);
+			TextBuilder message = Texts.builder();
+			
+			message.append(Formatter.clear(16));
+			message.append(Texts.of(Formatter.fill(26, '/'), Formatter.fill(26, '\\')));
+			message.append(CommandMessageFormatting.NEWLINE_TEXT);
+			message.append(CommandMessageFormatting.NEWLINE_TEXT);
+			
+			for(Text line: lines) {
+				message.append(Formatter.center(line, 52));
+				message.append(CommandMessageFormatting.NEWLINE_TEXT);
+			}
+			
+			message.append(Texts.of(Formatter.fill(26, '\\'), Formatter.fill(26, '/')));
+			player.sendMessage(message.build());
 			
 		}
 		
