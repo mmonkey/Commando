@@ -1,13 +1,12 @@
 package com.gmail.mmonkey.Commando.Services;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.gmail.mmonkey.Commando.Action;
+import com.gmail.mmonkey.Commando.ActionType;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.action.ClickAction;
 
-import com.gmail.mmonkey.Commando.Action;
-import com.gmail.mmonkey.Commando.ActionType;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextParsingService {
 

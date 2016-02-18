@@ -1,18 +1,15 @@
 package com.gmail.mmonkey.Commando.Services;
 
+import com.gmail.mmonkey.Commando.Filters.Filter;
+import com.gmail.mmonkey.Commando.Match;
+import org.spongepowered.api.text.Text;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.TextBuilder;
-import org.spongepowered.api.text.Texts;
-
-import com.gmail.mmonkey.Commando.Match;
-import com.gmail.mmonkey.Commando.Filters.Filter;
 
 public class TextConvertingService {
 	
@@ -24,7 +21,7 @@ public class TextConvertingService {
 	
 	public void setText(Text text) {
 		this.text = text;
-		this.raw = Texts.toPlain(text);
+		this.raw = text.toPlain();
 	}
 	
 	public Collection<Filter> getFilters() {
@@ -57,7 +54,7 @@ public class TextConvertingService {
 	public Text process() {
 		
 		if (this.text == null) {
-			return Texts.of("");
+			return Text.of("");
 		}
 		
 		if (this.filters.isEmpty()) {
@@ -116,7 +113,7 @@ public class TextConvertingService {
 		
 		if (!matches.isEmpty()) {
 			
-			TextBuilder builder = Texts.builder();
+			Text.Builder builder = Text.builder();
 			StringBuilder piece = new StringBuilder();
 			
 			for (int i = 0; i < original.length(); i++) {
@@ -124,7 +121,7 @@ public class TextConvertingService {
 				int index = i;
 				for (Match match:matches) {
 					if (i == match.getStart()) {
-						builder.append(Texts.of(piece.toString()));
+						builder.append(Text.of(piece.toString()));
 						piece = new StringBuilder();
 						builder.append(match.getFilter().filter(match));
 						i = match.getEnd() - 1;
@@ -136,7 +133,7 @@ public class TextConvertingService {
 				}
 				
 				if (index == (original.length() - 1)) {
-					builder.append(Texts.of(piece.toString()));
+					builder.append(Text.of(piece.toString()));
 				}
 				
 			}
@@ -145,7 +142,7 @@ public class TextConvertingService {
 		
 		}
 		
-		return Texts.of(original);
+		return Text.of(original);
 		
 	}
 	
