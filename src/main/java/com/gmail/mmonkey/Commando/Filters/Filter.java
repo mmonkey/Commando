@@ -1,10 +1,9 @@
 package com.gmail.mmonkey.Commando.Filters;
 
-import java.util.regex.Pattern;
-
+import com.gmail.mmonkey.Commando.Match;
 import org.spongepowered.api.text.Text;
 
-import com.gmail.mmonkey.Commando.Match;
+import java.util.regex.Pattern;
 
 public abstract class Filter {
 

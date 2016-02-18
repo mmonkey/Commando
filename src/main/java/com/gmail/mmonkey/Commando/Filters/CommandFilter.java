@@ -1,14 +1,12 @@
 package com.gmail.mmonkey.Commando.Filters;
 
-import java.util.regex.Pattern;
-
+import com.gmail.mmonkey.Commando.Match;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.text.action.TextActions;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyles;
 
-import com.gmail.mmonkey.Commando.Match;
+import java.util.regex.Pattern;
 
 public class CommandFilter extends Filter {
 
@@ -33,14 +31,14 @@ public class CommandFilter extends Filter {
 			return getCommandAction(match.getTitle(), command, preview);
 		}
 		
-		return Texts.of(match.getContent());
+		return Text.of(match.getContent());
 	}
 	
 	private Text getCommandAction(String title, String command, String preview) {
 		String showText = (title.length() > 0) ? title : preview;
-		return Texts.builder(showText)
+		return Text.builder(showText)
 			.onClick(TextActions.runCommand("/" + command))
-			.onHover(TextActions.showText(Texts.of(TextColors.GOLD, "/" + command)))
+			.onHover(TextActions.showText(Text.of(TextColors.GOLD, "/" + command)))
 			.color(TextColors.AQUA)
 			.style(TextStyles.UNDERLINE)
 			.build();

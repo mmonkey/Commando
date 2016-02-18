@@ -1,12 +1,9 @@
 package com.gmail.mmonkey.Commando.Formatting;
 
+import org.spongepowered.api.text.Text;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.TextBuilder;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.command.CommandMessageFormatting;
 
 public class Formatter {
 
@@ -16,10 +13,10 @@ public class Formatter {
 	
 	public static Text clear(int numLines) {
 		
-		TextBuilder text = Texts.builder();
+		Text.Builder text = Text.builder();
 		
 		for (int i = 0; i < numLines; i++) {
-			text.append(CommandMessageFormatting.NEWLINE_TEXT);
+			text.append(Text.of(System.lineSeparator()));
 		}
 		
 		return text.build();
@@ -37,18 +34,18 @@ public class Formatter {
 	}
 	
 	public static Text center(Text input, int width) {
-		
-		int length = getCharacterWidth(Texts.toPlain(input));
+
+		int length = getCharacterWidth(input.toPlain());
 		
 		if (length < width) {
 			
 			int half = (width - length) / 2;
 			int padding = half * 3 / 2;
 			
-			TextBuilder text = Texts.builder();
-			text.append(Texts.of(fill(padding, ' ')));
-			text.append(Texts.of(input));
-			text.append(Texts.of(fill(padding, ' ')));
+			Text.Builder text = Text.builder();
+			text.append(Text.of(fill(padding, ' ')));
+			text.append(Text.of(input));
+			text.append(Text.of(fill(padding, ' ')));
 			
 			return text.build();
 		}
