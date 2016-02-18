@@ -1,20 +1,22 @@
 package com.gmail.mmonkey.Commando.Events;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.gmail.mmonkey.Commando.Commando;
+import com.gmail.mmonkey.Commando.Filters.Filter;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Cancellable;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.impl.AbstractEvent;
 import org.spongepowered.api.text.Text;
 
-import com.gmail.mmonkey.Commando.Filters.Filter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
 
 public class CommandoConvertTextEvent extends AbstractEvent implements Cancellable {
 	
 	private boolean cancelled = false;
 
+	private Optional<Player> player;
 	private Collection<Text> text = new ArrayList<Text>();
 	private Collection<Filter> filters = new ArrayList<Filter>();
 	private TextType type;
@@ -25,6 +27,10 @@ public class CommandoConvertTextEvent extends AbstractEvent implements Cancellab
 
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	public Optional<Player> getPlayer() {
+		return this.player;
 	}
 	
 	public TextType getTextType() {
@@ -66,13 +72,15 @@ public class CommandoConvertTextEvent extends AbstractEvent implements Cancellab
 		this.filters = filters;
 	}
 	
-	public CommandoConvertTextEvent(TextType type, Collection<Text> text, Collection<Filter> filters) {
+	public CommandoConvertTextEvent(Optional<Player> player, TextType type, Collection<Text> text, Collection<Filter> filters) {
+		this.player = player;
 		this.type = type;
 		this.text = text;
 		this.filters = filters;
 	}
 	
-	public CommandoConvertTextEvent(TextType type, Collection<Text> text, Filter... filters) {
+	public CommandoConvertTextEvent(Optional<Player> player, TextType type, Collection<Text> text, Filter... filters) {
+		this.player = player;
 		this.type = type;
 		this.text = text;
 		this.setFilters(filters);
