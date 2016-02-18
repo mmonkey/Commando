@@ -20,6 +20,10 @@ public class CommandoConvertTextEvent extends AbstractEvent implements Cancellab
 	private Collection<Text> text = new ArrayList<Text>();
 	private Collection<Filter> filters = new ArrayList<Filter>();
 	private TextType type;
+
+	public Cause getCause() {
+		return Cause.of(Commando.getInstance());
+	}
 	
 	public boolean isCancelled() {
 		return this.cancelled;
@@ -84,9 +88,5 @@ public class CommandoConvertTextEvent extends AbstractEvent implements Cancellab
 		this.type = type;
 		this.text = text;
 		this.setFilters(filters);
-	}
-
-	public Cause getCause() {
-		return Cause.of(Commando.getInstance());
 	}
 }
