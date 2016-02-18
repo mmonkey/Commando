@@ -16,7 +16,7 @@ public class Formatter {
 		Text.Builder text = Text.builder();
 		
 		for (int i = 0; i < numLines; i++) {
-			text.append(Text.of(System.lineSeparator()));
+			text.append(Text.NEW_LINE);
 		}
 		
 		return text.build();
